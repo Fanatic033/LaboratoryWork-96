@@ -13,7 +13,6 @@ const client = new OAuth2Client(config.google.clientId);
 
 
 usersRouter.post('/', imagesUpload.single('avatar'), async (req, res, next) => {
-
     try {
         const user = new User({
             email: req.body.email,

@@ -11,6 +11,7 @@ const UserSchema = new Schema<UserFields, UserModel, UserMethods>({
         type: String,
         required: true,
         unique: true,
+        match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,5})+$/, 'Please fill a valid email address'],
         validate: {
             validator: async function (value: string): Promise<boolean> {
                 if (!(this as HydratedDocument<UserFields>).isModified('email')) {
