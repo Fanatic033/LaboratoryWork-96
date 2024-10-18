@@ -28,8 +28,10 @@ const CocktailCard: React.FC<state> = ({ cocktail }) => {
   };
 
   const onDelete = async () => {
-    await dispatch(deleteCocktails(cocktail._id));
-    await dispatch(getCocktails());
+    if (window.confirm('Are you sure you want to delete?')) {
+      await dispatch(deleteCocktails(cocktail._id));
+      await dispatch(getCocktails());
+    }
   };
 
   const onClickNavigate = () => {
@@ -37,9 +39,16 @@ const CocktailCard: React.FC<state> = ({ cocktail }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia component="img" height="300" image={cardImage} alt="cocktail" sx={{ width: '68%' }} />
-      <CardContent>
+    <Card sx={{
+      width: '300px',
+      height: '100%',
+      minHeight: '400px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    }}>
+      <CardMedia component="img" height="100%" image={cardImage} alt="cocktail" sx={{ width: '68%' }} />
+      <CardContent sx={{ flexGrow: 1 }}>
         <CardActionArea onClick={onClickNavigate}>
           <Typography gutterBottom variant="h5" component="div">
             {cocktail.name}
@@ -47,24 +56,26 @@ const CocktailCard: React.FC<state> = ({ cocktail }) => {
         </CardActionArea>
         {!cocktail.isPublished && (
           <Typography variant="body1" color="red">
-            Unpublished
+            Waiting Moderator Checking
           </Typography>
         )}
-        {user?.role === 'admin' && !cocktail.isPublished && (
-          <Box mb={2}>
-            <LoadingButton variant="contained" onClick={onPublic} loading={loading}>
-              Publish toggle
-            </LoadingButton>
-          </Box>
-        )}
-        {user?.role === 'admin' ? (
-          <LoadingButton variant="contained" onClick={onDelete} loading={deleting}>
-            Delete
-          </LoadingButton>
-        ) : (
-          ''
-        )}
+
       </CardContent>
+      {user?.role === 'admin' && !cocktail.isPublished && (
+        <Box mb={2}>
+          <LoadingButton variant="contained" onClick={onPublic} loading={loading}>
+            Publish toggle
+          </LoadingButton>
+        </Box>
+      )}
+      {user?.role === 'admin' ? (
+        <LoadingButton variant="contained" onClick={onDelete} loading={deleting}
+                       sx={{ width: '300px', marginBottom: '10px' }} color={'error'}>
+          Delete
+        </LoadingButton>
+      ) : (
+        ''
+      )}
     </Card>
   );
 };

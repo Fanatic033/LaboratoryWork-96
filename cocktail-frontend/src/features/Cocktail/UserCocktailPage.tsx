@@ -1,4 +1,4 @@
-import  { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { CircularProgress, Container, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectStateOfCocktails, selectStatusOfCocktails } from './CocktailsSlice.ts';
@@ -22,12 +22,12 @@ const userCocktailPage = () => {
   }, [callBack]);
 
   return (
-    <Container fixed>
+    <Container>
       {cocktail.length ? <>
-          <Typography textAlign="center" variant="h2">
-            My Cocktails:
+          <Typography textAlign="left" variant="h2">
+            My Cocktails
           </Typography>
-          <Container>
+          <Container sx={{ display: 'flex', gap: 5, marginTop: '100px' }}>
             {loading ? <CircularProgress /> : cocktail.map((el) => <CocktailCard key={Math.random()}
                                                                                  cocktail={el} />)}
           </Container>

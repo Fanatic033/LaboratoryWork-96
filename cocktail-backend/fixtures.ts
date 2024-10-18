@@ -73,6 +73,17 @@ const run = async () => {
         },
       ],
     },
+    {
+      name: 'Pink negroni',
+      recipe: 'Combine the pink gin, vermouth and Aperol in a tumbler with a small handful of ice. Stir until the outside of the glass feels cold.',
+      author: user2._id,
+      image: 'fixtures/Pink-negroni.webp',
+      ingredients: [
+        { name: 'pink gin', amount: '35ml' },
+        { name: 'sweet white vermouth', amount: '25ml' },
+        { name: 'Aperol', amount: '15ml' },
+      ],
+    },
   );
   await db.close();
 };

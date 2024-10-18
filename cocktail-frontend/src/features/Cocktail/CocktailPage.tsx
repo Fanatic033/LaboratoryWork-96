@@ -21,10 +21,10 @@ const CocktailsPage = () => {
   return (
     <Container fixed>
       {cocktail.length ? <>
-          <Typography textAlign="center" variant="h2">
-            Cocktails:
+          <Typography textAlign="left" variant="h2">
+            Cocktails
           </Typography>
-          <Container>
+          <Container sx={{ display: 'flex', gap: 5, marginTop: '100px' }}>
             {loading ? <CircularProgress /> : cocktail.map((el) => <CocktailCard key={Math.random()} cocktail={el} />)}
           </Container>
         </> :
