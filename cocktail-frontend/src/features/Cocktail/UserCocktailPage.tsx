@@ -32,7 +32,7 @@ const userCocktailPage = () => {
                                                                                  cocktail={el} />)}
           </Container>
         </> :
-        <Typography textAlign="center" variant="h2">There is no cocktails yet</Typography>
+        <Typography textAlign="center" variant="h2">There is no cocktails</Typography>
       }
     </Container>
   );

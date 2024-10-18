@@ -9,6 +9,7 @@ import { selectUser } from './features/User/userSlice.ts';
 import UserCocktailPage from './features/Cocktail/UserCocktailPage.tsx';
 import { Typography } from '@mui/material';
 import ProtectedRoute from './UI/ProtectedRoute.tsx';
+import OneCocktailPage from './features/Cocktail/OneCocktailPage.tsx';
 
 const App = () => {
   const user = useAppSelector(selectUser);
@@ -22,12 +23,13 @@ const App = () => {
         <Route path={'/login'} element={<Login />} />
         <Route path={'/'} element={<CocktailPage />} />
         <Route path={'new-cocktail'} element={<CocktailForm />} />
+        <Route path="/cocktails/:id" element={<OneCocktailPage />} />
         <Route
-          path="/cocktails/myCocktails"
+          path="/my-cocktails"
           element={
-          <ProtectedRoute isAllowed={Boolean(user)}>
-                  <UserCocktailPage/>
-          </ProtectedRoute>
+            <ProtectedRoute isAllowed={Boolean(user)}>
+              <UserCocktailPage />
+            </ProtectedRoute>
           }
         />
         <Route

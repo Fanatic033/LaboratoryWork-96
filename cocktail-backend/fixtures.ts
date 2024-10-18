@@ -44,6 +44,35 @@ const run = async () => {
         { name: 'triple sec', amount: '20ml' },
       ],
     },
+    {
+      name: 'Singapore sling',
+      image: 'fixtures/singapore-sling.jpeg',
+      author: user2._id,
+      recipe: 'Pour the Tanqueray London Dry Gin, cherry brandy and Benedictine into a mixing glass or a jug. Add the ice and Angostura bitters. Stir well until the outside of the glass feels cold.',
+      isPublished: true,
+      ingredients: [
+        {
+          name: 'Tanqueray London Dry Gin',
+          amount: '25ml',
+        },
+        {
+          name: 'cherry brandy',
+          amount: '25ml',
+        },
+        {
+          name: 'Benedictine',
+          amount: '25ml',
+        },
+        {
+          name: 'pineapple juice',
+          amount: '50ml',
+        },
+        {
+          name: 'lime juice',
+          amount: '25ml ',
+        },
+      ],
+    },
   );
   await db.close();
 };

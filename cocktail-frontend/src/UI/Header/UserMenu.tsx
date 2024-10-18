@@ -61,7 +61,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
           <MenuItem>My Account {user.displayName}</MenuItem>
           <MenuItem
             onClick={() => {
-              navigate('/cocktails/myCocktails');
+              navigate('/my-cocktails');
             }}
           >
             My cocktails

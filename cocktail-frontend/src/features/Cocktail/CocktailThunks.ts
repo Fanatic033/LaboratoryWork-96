@@ -13,7 +13,16 @@ export const getCocktails = createAsyncThunk<Cocktail[]>('Cocktails/getAll', asy
 
 export const getCocktailsByAuthor = createAsyncThunk<Cocktail[], string>('Cocktails/getByAuthor', async (arg) => {
   try {
-    const response = await axiosApi.get('/cocktails?user=' + arg);
+    const response = await axiosApi.get('/cocktails?author=' + arg);
+    return response.data;
+  } catch (e) {
+    return e;
+  }
+});
+
+export const getOneCocktail = createAsyncThunk<Cocktail[], string>('Cocktails/getOne', async (arg) => {
+  try {
+    const response = await axiosApi.get('/cocktails/' + arg);
     return response.data;
   } catch (e) {
     return e;

@@ -11,22 +11,27 @@ const cocktailsRouter = Router();
 
 cocktailsRouter.get('/', publicGet, async (req: RequestWithUser, res) => {
   try {
-    if (req.user && req.user?.role === 'admin') {
+    if (req.user && req.user.role === 'admin') {
       const cocktails = await Cocktail.find();
       return res.send(cocktails);
     }
+
     if (req.user) {
-      const cocktails = await Cocktail.find({ author: req.user._id });
+      const cocktails = await Cocktail.find({
+        $or: [{ author: req.user._id }, { isPublished: true }],
+      });
       return res.send(cocktails);
     }
+
     const cocktails = await Cocktail.find({ isPublished: true });
     return res.send(cocktails);
-
   } catch (error) {
     console.error(error);
     return res.sendStatus(500);
   }
 });
+
+
 
 cocktailsRouter.get('/:id', publicGet, async (req, res) => {
   try {

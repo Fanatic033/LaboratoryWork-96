@@ -3,7 +3,7 @@ import { RootState } from '../../app/store';
 import { Cocktail } from '../../types';
 import {
   createCocktails, deleteCocktails,
-  getCocktails, patchCocktails,
+  getCocktails, getCocktailsByAuthor, getOneCocktail, patchCocktails,
 } from './CocktailThunks.ts';
 
 interface Initial {
@@ -45,6 +45,16 @@ export const CocktailsPageSlice = createSlice({
     builder.addCase(createCocktails.rejected, (state) => {
       state.posting = false;
     });
+    builder.addCase(getCocktailsByAuthor.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getCocktailsByAuthor.fulfilled, (state, action) => {
+      state.cocktails = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getCocktailsByAuthor.rejected, (state) => {
+      state.loading = false;
+    });
 
     builder.addCase(deleteCocktails.pending, (state) => {
       state.deleting = true;
@@ -64,6 +74,17 @@ export const CocktailsPageSlice = createSlice({
     builder.addCase(patchCocktails.rejected, (state) => {
       state.posting = false;
     });
+    builder.addCase(getOneCocktail.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getOneCocktail.fulfilled, (state, action) => {
+      state.cocktails = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getOneCocktail.rejected, (state) => {
+      state.loading = false;
+    });
+
   },
 });
 
