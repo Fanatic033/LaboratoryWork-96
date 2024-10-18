@@ -3,7 +3,7 @@ import { RootState } from '../../app/store';
 import { Cocktail } from '../../types';
 import {
   createCocktails, deleteCocktails,
-  getCocktails,
+  getCocktails, patchCocktails,
 } from './CocktailThunks.ts';
 
 interface Initial {
@@ -11,7 +11,6 @@ interface Initial {
   loading: boolean;
   posting: boolean;
   deleting: boolean;
-  alert: boolean;
 }
 
 const initialState: Initial = {
@@ -19,17 +18,12 @@ const initialState: Initial = {
   loading: false,
   posting: false,
   deleting: false,
-  alert: false,
 };
 
 export const CocktailsPageSlice = createSlice({
   name: 'Cocktails',
   initialState,
-  reducers: {
-    closeAlert: state => {
-      state.alert = false;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getCocktails.pending, (state) => {
       state.loading = true;
@@ -47,12 +41,10 @@ export const CocktailsPageSlice = createSlice({
     });
     builder.addCase(createCocktails.fulfilled, (state) => {
       state.posting = false;
-      state.alert = true;
     });
     builder.addCase(createCocktails.rejected, (state) => {
       state.posting = false;
     });
-
 
     builder.addCase(deleteCocktails.pending, (state) => {
       state.deleting = true;
@@ -62,6 +54,15 @@ export const CocktailsPageSlice = createSlice({
     });
     builder.addCase(deleteCocktails.rejected, (state) => {
       state.deleting = false;
+    });
+    builder.addCase(patchCocktails.pending, (state) => {
+      state.posting = true;
+    });
+    builder.addCase(patchCocktails.fulfilled, (state) => {
+      state.posting = false;
+    });
+    builder.addCase(patchCocktails.rejected, (state) => {
+      state.posting = false;
     });
   },
 });

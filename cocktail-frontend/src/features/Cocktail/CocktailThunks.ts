@@ -11,6 +11,15 @@ export const getCocktails = createAsyncThunk<Cocktail[]>('Cocktails/getAll', asy
   }
 });
 
+export const getCocktailsByAuthor = createAsyncThunk<Cocktail[], string>('Cocktails/getByAuthor', async (arg) => {
+  try {
+    const response = await axiosApi.get('/cocktails?user=' + arg);
+    return response.data;
+  } catch (e) {
+    return e;
+  }
+});
+
 export const createCocktails = createAsyncThunk<Cocktail, CocktailMutation>(
   'Cocktails/new',
   async (arg) => {
@@ -35,10 +44,18 @@ export const createCocktails = createAsyncThunk<Cocktail, CocktailMutation>(
   });
 
 
-
 export const deleteCocktails = createAsyncThunk<Cocktail, string>('Cocktails/delete', async (arg) => {
   try {
     const response = await axiosApi.delete('/cocktails/' + arg);
+    return response.data;
+  } catch (e) {
+    return e;
+  }
+});
+
+export const patchCocktails = createAsyncThunk<Cocktail, string>('Cocktails/public', async (arg) => {
+  try {
+    const response = await axiosApi.patch('/cocktails/' + arg + '/togglePublished');
     return response.data;
   } catch (e) {
     return e;
