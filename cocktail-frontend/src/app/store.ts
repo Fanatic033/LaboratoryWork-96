@@ -4,6 +4,7 @@ import { persistStore } from 'redux-persist';
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE } from 'redux-persist/es/constants';
 import persistReducer from 'redux-persist/es/persistReducer';
 import { usersReducer } from '../features/User/userSlice.ts';
+import { CocktailsReducer } from '../features/Cocktail/CocktailsSlice.ts';
 
 const usersPersistConfig = {
   key: 'cocktails',
@@ -12,6 +13,7 @@ const usersPersistConfig = {
 };
 
 const rootReducer = {
+  cocktails: CocktailsReducer,
   users: persistReducer(usersPersistConfig, usersReducer),
 };
 
